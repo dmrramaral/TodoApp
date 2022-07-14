@@ -34,10 +34,6 @@ public class Task {
         this.updatedAt = updateAt;
     }
 
-    public Task() {
-        this.createdAt = new Date();
-    }
-
     public int getId() {
         return id;
     }
