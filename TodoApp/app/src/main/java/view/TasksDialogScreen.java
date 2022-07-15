@@ -5,6 +5,10 @@
 package view;
 
 import controller.TaskController;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import javax.swing.JOptionPane;
+import model.Project;
 import model.Task;
 
 /**
@@ -12,10 +16,10 @@ import model.Task;
  * @author dsmamaral
  */
 public class TasksDialogScreen extends javax.swing.JDialog {
-    
+
     TaskController taskController;
     Task task;
-    
+    Project project;
 
     /**
      * Creates new form TasksDialogScreen
@@ -24,7 +28,7 @@ public class TasksDialogScreen extends javax.swing.JDialog {
         super(parent, modal);
         initComponents();
         taskController = new TaskController();
-        
+
     }
 
     /**
@@ -44,12 +48,12 @@ public class TasksDialogScreen extends javax.swing.JDialog {
         jTextFieldName = new javax.swing.JTextField();
         jLabelDescription = new javax.swing.JLabel();
         jScrollPaneDescription = new javax.swing.JScrollPane();
-        jTextArea1 = new javax.swing.JTextArea();
+        jTextAreaDescription = new javax.swing.JTextArea();
         jLabelDeadLine = new javax.swing.JLabel();
         jFormattedTextFieldDeadLine = new javax.swing.JFormattedTextField();
         jLabelNotes = new javax.swing.JLabel();
         jScrollPaneNotes = new javax.swing.JScrollPane();
-        jTextArea2 = new javax.swing.JTextArea();
+        jTextAreaNotes = new javax.swing.JTextArea();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -96,9 +100,9 @@ public class TasksDialogScreen extends javax.swing.JDialog {
         jLabelDescription.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabelDescription.setText("Descrição");
 
-        jTextArea1.setColumns(20);
-        jTextArea1.setRows(5);
-        jScrollPaneDescription.setViewportView(jTextArea1);
+        jTextAreaDescription.setColumns(20);
+        jTextAreaDescription.setRows(5);
+        jScrollPaneDescription.setViewportView(jTextAreaDescription);
 
         jLabelDeadLine.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabelDeadLine.setText("Prazo");
@@ -106,9 +110,9 @@ public class TasksDialogScreen extends javax.swing.JDialog {
         jLabelNotes.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabelNotes.setText("Notas");
 
-        jTextArea2.setColumns(20);
-        jTextArea2.setRows(5);
-        jScrollPaneNotes.setViewportView(jTextArea2);
+        jTextAreaNotes.setColumns(20);
+        jTextAreaNotes.setRows(5);
+        jScrollPaneNotes.setViewportView(jTextAreaNotes);
 
         javax.swing.GroupLayout jPanelTableProjectLayout = new javax.swing.GroupLayout(jPanelTableProject);
         jPanelTableProject.setLayout(jPanelTableProjectLayout);
@@ -177,11 +181,32 @@ public class TasksDialogScreen extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jLabelSubTitleMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelSubTitleMouseClicked
-        
-        task = new Task();
-        task.setName(jTextFieldName.getText());
-        task.setDescription(jTextArea1.getName());
-        
+
+        try {
+            task = new Task();
+
+            task.setIdProject(project.getId());
+            task.setName(jTextFieldName.getText());
+            task.setDescription(jTextAreaDescription.getText());
+            task.setNotes(jLabelNotes.getText());
+            task.setIsCompleted(false);
+            
+            
+            SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+            Date deadline = null;
+            
+            deadline = dateFormat.parse(jFormattedTextFieldDeadLine.getText());
+                    
+            task.setDeadline(deadline);
+            
+
+            taskController.save(task);
+            JOptionPane.showMessageDialog(rootPane, "Tarefa salvo com Sucesso");
+        } catch (Exception e) {
+            throw new RuntimeException("Erro ao salvar tarefa" + e.getMessage());
+        }
+        this.dispose();
+
         // TODO add your handling code here:
     }//GEN-LAST:event_jLabelSubTitleMouseClicked
 
@@ -239,8 +264,13 @@ public class TasksDialogScreen extends javax.swing.JDialog {
     private javax.swing.JPanel jPanelTooBarTasks;
     private javax.swing.JScrollPane jScrollPaneDescription;
     private javax.swing.JScrollPane jScrollPaneNotes;
-    private javax.swing.JTextArea jTextArea1;
-    private javax.swing.JTextArea jTextArea2;
+    private javax.swing.JTextArea jTextAreaDescription;
+    private javax.swing.JTextArea jTextAreaNotes;
     private javax.swing.JTextField jTextFieldName;
     // End of variables declaration//GEN-END:variables
+
+    public void setProject(Project project) {
+        this.project = project;
+    }
+
 }
