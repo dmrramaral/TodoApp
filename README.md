@@ -9,3 +9,10 @@
 - `Funcionalidade 1`: Listagem de projetos e tarefas
 - `Funcionalidade 2`: Criação de projetos e tarefas
 - `Funcionalidade 3`: Exclusão e alteração de tarefas
+
+
+## ✔️ Técnicas e tecnologias utilizadas
+
+- ``Java 11``
+- ``NetBeans IDEA``
+- ``Paradigma de orientação a objetos``
