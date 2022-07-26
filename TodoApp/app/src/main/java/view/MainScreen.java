@@ -13,6 +13,8 @@ import java.awt.event.WindowEvent;
 import java.util.List;
 import javax.swing.DefaultListModel;
 import model.Project;
+import model.Task;
+import util.TaskTableModel;
 
 /**
  *
@@ -24,6 +26,7 @@ public class MainScreen extends javax.swing.JFrame {
     ProjectController projectController;
 
     DefaultListModel projectModel;
+    TaskTableModel taskModel;
 
     /**
      * Creates new form MainScreen
@@ -275,6 +278,7 @@ public class MainScreen extends javax.swing.JFrame {
         jTableTasks.setGridColor(java.awt.Color.white);
         jTableTasks.setRowHeight(50);
         jTableTasks.setSelectionBackground(java.awt.Color.white);
+        jTableTasks.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         jTableTasks.setShowGrid(false);
         jScrollPaneTasks.setViewportView(jTableTasks);
         jTableTasks.getColumnModel().getSelectionModel().setSelectionMode(javax.swing.ListSelectionModel.SINGLE_INTERVAL_SELECTION);
@@ -334,8 +338,8 @@ public class MainScreen extends javax.swing.JFrame {
         // TODO add your handling code here:
         ProjectDialogScreen projectDialogScreen = new ProjectDialogScreen(this, rootPaneCheckingEnabled);
         projectDialogScreen.setVisible(true);
-        projectDialogScreen.addWindowListener(new WindowAdapter(){
-            public void windowClosed(WindowEvent e ){
+        projectDialogScreen.addWindowListener(new WindowAdapter() {
+            public void windowClosed(WindowEvent e) {
                 loadProject();
             }
         });
@@ -346,6 +350,12 @@ public class MainScreen extends javax.swing.JFrame {
         TasksDialogScreen tasksDialogScreen = new TasksDialogScreen(this, rootPaneCheckingEnabled);
         tasksDialogScreen.setProject(null);
         tasksDialogScreen.setVisible(true);
+
+        tasksDialogScreen.addWindowListener(new WindowAdapter() {
+            public void windowClosed(WindowEvent e) {
+                loadTask(3);
+            }
+        });
         // TODO add your handling code here:
     }//GEN-LAST:event_jLabelTasksAddMouseClicked
 
@@ -427,6 +437,10 @@ public class MainScreen extends javax.swing.JFrame {
     public void initComponentsModel() {
         projectModel = new DefaultListModel<Project>();
         loadProject();
+
+        taskModel = new TaskTableModel();
+        jTableTasks.setModel(taskModel);
+        loadTask(3);
     }
 
     public void loadProject() {
@@ -439,6 +453,13 @@ public class MainScreen extends javax.swing.JFrame {
 
             projectModel.addElement(project);
         }
-        
+
     }
+
+    public void loadTask(int idProject) {
+        List<Task> tasks = taskController.getAll(idProject);
+        taskModel.setTasks(tasks);
+
+    }
+
 }
