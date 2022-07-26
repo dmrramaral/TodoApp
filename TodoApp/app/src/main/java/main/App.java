@@ -3,9 +3,7 @@
  */
 package main;
 
-import controller.ProjectController;
-import java.util.List;
-import model.Project;
+
 
 public class App {
     public String getGreeting() {
@@ -14,13 +12,7 @@ public class App {
 
     public static void main(String[] args) {
        
-        ProjectController projetoController = new ProjectController();
         
-        Project p1 = new Project();
-        
-        List<Project> listarProjetos = projetoController.getAll();
-       
-        System.out.println("Teste" + listarProjetos.toString() );
         
         
         
