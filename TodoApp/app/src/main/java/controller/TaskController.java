@@ -66,8 +66,7 @@ public class TaskController {
                 + "notes = ?,"
                 + "deadline = ?,"
                 + "createdAt = ?,"
-                + "updatedAt = ?,"
-                + "WHERE id = ?";;
+                + "updatedAt = ? WHERE id = ?";
 
         Connection connection = null;
         PreparedStatement statement = null;
