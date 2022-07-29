@@ -14,6 +14,8 @@ import java.util.List;
 import javax.swing.DefaultListModel;
 import model.Project;
 import model.Task;
+import util.ButtonColumnCellRender;
+import util.DeadlineColumnCellRender;
 import util.TaskTableModel;
 
 /**
@@ -33,9 +35,11 @@ public class MainScreen extends javax.swing.JFrame {
      */
     public MainScreen() {
         initComponents();
-        decorateTableTasks();
+
         initDataController();
         initComponentsModel();
+
+        decorateTableTasks();
     }
 
     /**
@@ -372,6 +376,11 @@ public class MainScreen extends javax.swing.JFrame {
                 taskController.update(task);
                 break;
             case 4:
+                TasksDialogScreen tasksDialogScreen = new TasksDialogScreen(this, rootPaneCheckingEnabled);
+                
+
+                
+                tasksDialogScreen.setVisible(true);
 
                 break;
             case 5:
@@ -462,9 +471,12 @@ public class MainScreen extends javax.swing.JFrame {
         jTableTasks.getTableHeader().setBackground(new Color(0, 153, 102));
         jTableTasks.getTableHeader().setForeground(new Color(255, 255, 255));
 
-        // criando o sorter automatico que ordena
-        jTableTasks.setAutoCreateRowSorter(true);
+        jTableTasks.getColumnModel().getColumn(2).setCellRenderer(new DeadlineColumnCellRender());
+        jTableTasks.getColumnModel().getColumn(4).setCellRenderer(new ButtonColumnCellRender("edit"));
+        jTableTasks.getColumnModel().getColumn(5).setCellRenderer(new ButtonColumnCellRender("delete"));
 
+        // criando o sorter automatico que ordena
+        //jTableTasks.setAutoCreateRowSorter(true);
     }
 
     public void initDataController() {
