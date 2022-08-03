@@ -119,11 +119,11 @@ public class TasksDialogScreen extends javax.swing.JDialog {
 
         jLabelValidName.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabelValidName.setForeground(new java.awt.Color(153, 0, 0));
-        jLabelValidName.setText("Campo obrigatório");
+        jLabelValidName.setText("Campo nome obrigatório");
 
         jLabelValidDeadline.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabelValidDeadline.setForeground(new java.awt.Color(153, 0, 0));
-        jLabelValidDeadline.setText("Campo obrigatório");
+        jLabelValidDeadline.setText("Campo prazo obrigatório");
 
         javax.swing.GroupLayout jPanelTableProjectLayout = new javax.swing.GroupLayout(jPanelTableProject);
         jPanelTableProject.setLayout(jPanelTableProjectLayout);
@@ -168,12 +168,12 @@ public class TasksDialogScreen extends javax.swing.JDialog {
                 .addComponent(jLabelDeadLine)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jFormattedTextFieldDeadLine, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 9, Short.MAX_VALUE)
-                .addComponent(jLabelValidDeadline)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabelValidDeadline, javax.swing.GroupLayout.PREFERRED_SIZE, 18, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabelNotes)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPaneNotes, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jScrollPaneNotes, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
 
@@ -223,6 +223,7 @@ public class TasksDialogScreen extends javax.swing.JDialog {
                 JOptionPane.showMessageDialog(rootPane, "Tarefa salvo com Sucesso");
                 this.dispose();
             } else {
+                hisErrorFields();
 
                 if (jTextFieldName.getText().isEmpty()) {
                     jLabelValidName.setVisible(true);
