@@ -13,7 +13,7 @@ import model.Project;
  * @author dsmamaral
  */
 public class ProjectDialogScreen extends javax.swing.JDialog {
-    
+
     ProjectController projectController;
     Project project;
 
@@ -24,8 +24,7 @@ public class ProjectDialogScreen extends javax.swing.JDialog {
         super(parent, modal);
         initComponents();
         projectController = new ProjectController();
-        
-        
+
     }
 
     /**
@@ -156,22 +155,29 @@ public class ProjectDialogScreen extends javax.swing.JDialog {
 
     private void jLabelTooBatSaveMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelTooBatSaveMouseClicked
         // TODO add your handling code here:
-        
-        
+
         try {
-            project = new Project();
-            project.setName(jTextFieldName.getText());
-            project.setDescription(jTextAreaDescription.getText());
-         
-           projectController.save(project);
-            JOptionPane.showMessageDialog(rootPane, "Projeto salvo com Sucesso");
-            
+
+            if (!jTextFieldName.getText().equals("")) {
+                project = new Project();
+                project.setName(jTextFieldName.getText());
+                project.setDescription(jTextAreaDescription.getText());
+
+                projectController.save(project);
+                JOptionPane.showMessageDialog(rootPane, "Projeto salvo com Sucesso");
+                this.dispose();
+
+            } else {
+                JOptionPane.showMessageDialog(rootPane, "O projeto não foi salvo, pois o campo nome não foi preenchido");
+
+            }
+
         } catch (Exception e) {
             throw new RuntimeException(" Cadastro nao efetuado " + e.getMessage());
-            
+
         }
-        this.dispose();
-        
+
+
     }//GEN-LAST:event_jLabelTooBatSaveMouseClicked
 
     private void jTextFieldNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldNameActionPerformed
